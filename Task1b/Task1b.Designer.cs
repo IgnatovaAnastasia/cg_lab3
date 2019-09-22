@@ -91,7 +91,6 @@
             this.fillRadioButton.TabIndex = 0;
             this.fillRadioButton.Text = "Залить";
             this.fillRadioButton.UseVisualStyleBackColor = true;
-            this.fillRadioButton.CheckedChanged += new System.EventHandler(this.fillRadioButton_CheckedChanged);
             // 
             // imageToDrawBox
             // 
@@ -116,7 +115,6 @@
             this.Controls.Add(this.chooseFileButton);
             this.Name = "Task1b";
             this.Text = "Task1b";
-            this.Load += new System.EventHandler(this.Task1b_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imageToFillBox)).EndInit();
             this.actionGroupBox.ResumeLayout(false);
             this.actionGroupBox.PerformLayout();

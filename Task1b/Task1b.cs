@@ -15,7 +15,7 @@ namespace cg_lab3.Task1b
         Image imageToFill;
         string selectedFileName;
         Graphics g;
-        Point from, start_fill, to;
+        Point from, startFill, to;
         bool drawing = true;
         Bitmap fillingImage, bitmapToFill;
         List<Point> border;
@@ -27,11 +27,6 @@ namespace cg_lab3.Task1b
             g = Graphics.FromImage(imageToDrawBox.Image);
             g.Clear(Color.White);
             border = new List<Point>();
-        }
-
-        private void Task1b_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void chooseFileButton_Click(object sender, EventArgs e)
@@ -65,10 +60,6 @@ namespace cg_lab3.Task1b
             }
         }
 
-        private void fillRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
         private void drawRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (drawRadioButton.Checked)
@@ -84,33 +75,33 @@ namespace cg_lab3.Task1b
 
         void FillWithImage(int x, int y) // точка щелчка мышки
         {
-            int step_x_right = 0, step_x_left = -1;
-            bool stop_right = false,  stop_left = false;
-            while ((!stop_right || !stop_left) && x > 0 && x < fillingImage.Width && y > 0 && y < fillingImage.Height)
+            int stepXRight = 0, stepXLeft = -1;
+            bool stopRight = false,  stopLeft = false;
+            while ((!stopRight || !stopLeft) && x > 0 && x < fillingImage.Width && y > 0 && y < fillingImage.Height)
             {
-                if ((x + step_x_right) < fillingImage.Width && !border.Contains(new Point(x + step_x_right, y)) 
-                    && !border.Contains(new Point(x + step_x_right, y - 1)) && !border.Contains(new Point(x + step_x_right, y + 1))
-                    && fillingImage.GetPixel(x + step_x_right, y) == Color.FromArgb(255, 255, 255, 255))
+                if ((x + stepXRight) < fillingImage.Width && !border.Contains(new Point(x + stepXRight, y)) 
+                    && !border.Contains(new Point(x + stepXRight, y - 1)) && !border.Contains(new Point(x + stepXRight, y + 1))
+                    && fillingImage.GetPixel(x + stepXRight, y) == Color.FromArgb(255, 255, 255, 255))
                 {
-                    fillingImage.SetPixel(x + step_x_right, y, bitmapToFill.GetPixel((((x + step_x_right - start_fill.X) % bitmapToFill.Width) + bitmapToFill.Width) % bitmapToFill.Width, ((((y - start_fill.Y) % bitmapToFill.Height)) + bitmapToFill.Height) % bitmapToFill.Height));
+                    fillingImage.SetPixel(x + stepXRight, y, bitmapToFill.GetPixel((((x + stepXRight - startFill.X) % bitmapToFill.Width) + bitmapToFill.Width) % bitmapToFill.Width, ((((y - startFill.Y) % bitmapToFill.Height)) + bitmapToFill.Height) % bitmapToFill.Height));
                     //fillingImage.SetPixel(x + step_x_right, y, Color.Aquamarine);
-                    step_x_right++;
+                    stepXRight++;
                 }
                 else
-                    stop_right = true;
-                if ((x + step_x_left) > 0 && !border.Contains(new Point(x + step_x_left, y)) 
-                    && !border.Contains(new Point(x + step_x_left, y - 1)) && !border.Contains(new Point(x + step_x_left, y + 1))
-                    && fillingImage.GetPixel(x + step_x_left, y) == Color.FromArgb(255, 255, 255, 255)) // линия по х влево
+                    stopRight = true;
+                if ((x + stepXLeft) > 0 && !border.Contains(new Point(x + stepXLeft, y)) 
+                    && !border.Contains(new Point(x + stepXLeft, y - 1)) && !border.Contains(new Point(x + stepXLeft, y + 1))
+                    && fillingImage.GetPixel(x + stepXLeft, y) == Color.FromArgb(255, 255, 255, 255)) // линия по х влево
                 {
-                    fillingImage.SetPixel(x + step_x_left, y, bitmapToFill.GetPixel((((x + step_x_left - start_fill.X) % bitmapToFill.Width) + bitmapToFill.Width) % bitmapToFill.Width, ((((y - start_fill.Y) % bitmapToFill.Height)) + bitmapToFill.Height) % bitmapToFill.Height));
+                    fillingImage.SetPixel(x + stepXLeft, y, bitmapToFill.GetPixel((((x + stepXLeft - startFill.X) % bitmapToFill.Width) + bitmapToFill.Width) % bitmapToFill.Width, ((((y - startFill.Y) % bitmapToFill.Height)) + bitmapToFill.Height) % bitmapToFill.Height));
                     //fillingImage.SetPixel(x + step_x_left, y, Color.Aquamarine);
-                    step_x_left--;
+                    stepXLeft--;
                 }
                 else
-                    stop_left = true;
+                    stopLeft = true;
             }
             imageToDrawBox.Image = fillingImage;
-                for (int i = step_x_left + 3; i < step_x_right; i++)
+                for (int i = stepXLeft + 3; i < stepXRight; i++)
                 {
                     FillWithImage(x + i, y - 1);
                 FillWithImage(x + i, y + 1);
@@ -160,7 +151,7 @@ namespace cg_lab3.Task1b
             {
                 fillingImage = new Bitmap(imageToDrawBox.Image);
                 bitmapToFill = new Bitmap(imageToFill);
-                start_fill = e.Location;
+                startFill = e.Location;
                 FillWithImage(e.X, e.Y);
             }
         }
