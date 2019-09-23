@@ -53,11 +53,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Task1a\Task1a.cs">
+    <Compile Include="Task1a\Drawing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Task1a\Task1a.Designer.cs">
-      <DependentUpon>Task1a.cs</DependentUpon>
+    <Compile Include="Task1a\Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Task1a\Form.Designer.cs">
+      <DependentUpon>Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Task1b\Task1b.cs">
       <SubType>Form</SubType>
@@ -83,6 +86,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Task1a\Form.resx">
+      <DependentUpon>Form.cs</DependentUpon>
     <EmbeddedResource Include="Task2\Task2.resx">
       <DependentUpon>Task2.cs</DependentUpon>
     </EmbeddedResource>
