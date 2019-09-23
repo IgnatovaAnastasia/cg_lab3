@@ -12,7 +12,7 @@ namespace cg_lab3.Task2
 {
     public partial class Task2 : Form
     {
-        Bitmap ImageBitmap;
+        Bitmap imageBitmap;
         Color baseColor;
 
         public Task2()
@@ -29,7 +29,7 @@ namespace cg_lab3.Task2
                 var task2 = new Task2();
                 this.Close();
                 task2.Picture1.Image = image;
-                task2.ImageBitmap = image;
+                task2.imageBitmap = image;
                 task2.ShowDialog();
             }
         }   
@@ -38,15 +38,15 @@ namespace cg_lab3.Task2
             var location = e.Location;//выбранные пикселы 
             //выделение границ области для заливки
             List<Point> points = new List<Point>();
-            var start = ImageBitmap.GetPixel(location.X, location.Y);
-            int nextY = ImageBitmap.Height - 1;
-            var nextPixel = ImageBitmap.GetPixel(location.X, nextY);
+            var start = imageBitmap.GetPixel(location.X, location.Y);
+            int nextY = imageBitmap.Height - 1;
+            var nextPixel = imageBitmap.GetPixel(location.X, nextY);
             baseColor = start;
 
             while (start != nextPixel)
             {
                 --nextY;
-                nextPixel = ImageBitmap.GetPixel(location.X, nextY);
+                nextPixel = imageBitmap.GetPixel(location.X, nextY);
             }
             int dir = 8;//кол-во направлений движения
             int prevDir = dir;
@@ -68,7 +68,7 @@ namespace cg_lab3.Task2
                         case 1: { nextPoint = new Point(startPoint.X + 1, startPoint.Y - 1); break; }//вправо вверх
                         default: { nextPoint = new Point(startPoint.X + 1, startPoint.Y); break; }//вверх
                     }
-                    if (ImageBitmap.GetPixel(nextPoint.X, nextPoint.Y) == baseColor)
+                    if (imageBitmap.GetPixel(nextPoint.X, nextPoint.Y) == baseColor)
                     {
                         startPoint = nextPoint;
                         break;
@@ -107,8 +107,8 @@ namespace cg_lab3.Task2
                     var prevPixel = baseColor;
                     for (var j = first.X; j < second.X - 1; j++)
                     {
-                        var pixel = ImageBitmap.GetPixel(j, first.Y);
-                        nextPixel = ImageBitmap.GetPixel(j + 1, first.Y);
+                        var pixel = imageBitmap.GetPixel(j, first.Y);
+                        nextPixel = imageBitmap.GetPixel(j + 1, first.Y);
                         if (pixel != baseColor && nextPixel == baseColor || pixel == baseColor && nextPixel != baseColor)
                             points.Add(new Point(j, first.Y));
                         if (pixel == baseColor)
@@ -138,8 +138,8 @@ namespace cg_lab3.Task2
 
                     for (var j = first.Y; j < second.Y - 1; j++)
                     {
-                        var pixel = ImageBitmap.GetPixel(first.X, j);
-                        nextPixel = ImageBitmap.GetPixel(first.X, j + 1);
+                        var pixel = imageBitmap.GetPixel(first.X, j);
+                        nextPixel = imageBitmap.GetPixel(first.X, j + 1);
                         if (pixel != baseColor && nextPixel == baseColor || pixel == baseColor && nextPixel != baseColor)
                             points.Add(new Point(first.X, j));
                         if (pixel == baseColor)
@@ -149,7 +149,7 @@ namespace cg_lab3.Task2
             }
             //конец заполнения пикселов 
             //рисование клона изображения с новой заливкой
-            var imgeClone = (Bitmap)ImageBitmap.Clone();
+            var imgeClone = (Bitmap)imageBitmap.Clone();
             foreach (Point pt in points)//проходим по всем пикселам границы
                 imgeClone.SetPixel(pt.X, pt.Y, Color.Red);
             Picture1.Image = imgeClone;

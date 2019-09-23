@@ -23,8 +23,6 @@
         {
             this.Picture1 = new System.Windows.Forms.PictureBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
-            this.colorDialog3 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.choosePictureButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Picture1)).BeginInit();
@@ -39,10 +37,6 @@
             this.Picture1.TabIndex = 0;
             this.Picture1.TabStop = false;
             this.Picture1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseClick);
-            // 
-            // colorDialog3
-            // 
-            this.colorDialog3.Color = System.Drawing.Color.DarkGray;
             // 
             // openFileDialog1
             // 
@@ -83,8 +77,6 @@
 
         private System.Windows.Forms.PictureBox Picture1;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.ColorDialog colorDialog2;
-        private System.Windows.Forms.ColorDialog colorDialog3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button choosePictureButton;
     }
