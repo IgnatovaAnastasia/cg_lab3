@@ -88,6 +88,7 @@
     </Compile>
     <EmbeddedResource Include="Task1a\Form.resx">
       <DependentUpon>Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Task2\Task2.resx">
       <DependentUpon>Task2.cs</DependentUpon>
     </EmbeddedResource>
