@@ -35,26 +35,43 @@ namespace cg_lab3.Task2
         }   
         private void PictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            var location = e.Location;//выбранные пикселы 
+            //Bitmap bmp = new Bitmap(image);
+            var location = e.Location;
+            /*Color start_color = imageBitmap.GetPixel(0, 0);
+            Color color;
+            for (int i = 0; i < imageBitmap.Width; ++i)
+            {
+                for (int j = 0; j < imageBitmap.Height; ++j)
+                {
+                    color = imageBitmap.GetPixel(i, j);
+                    if (color == start_color)
+                    {
+                        location.X = i;
+                        location.Y = j;
+                        break;
+                    }
+                }
+            }*/
+            //выбранные пикселы 
             //выделение границ области для заливки
-            List<Point> points = new List<Point>();
+            
             var start = imageBitmap.GetPixel(location.X, location.Y);
-            int nextY = imageBitmap.Height - 1;
+            int nextY = location.Y;
             var nextPixel = imageBitmap.GetPixel(location.X, nextY);
             baseColor = start;
-
-            while (start != nextPixel)
+            List<Point> points = new List<Point>();
+            while (start == nextPixel)
             {
                 --nextY;
                 nextPixel = imageBitmap.GetPixel(location.X, nextY);
             }
             int dir = 8;//кол-во направлений движения
             int prevDir = dir;
-            Point startPoint = new Point(location.X, nextY + 1);
+            Point startPoint = new Point(location.X, nextY);
             Point nextPoint = startPoint;
             while (true)
             {
-                dir += dir - 2 < 0 ? 6 : -2;
+                dir += dir - 1 < 0 ? 7 : -2;
                 while (true)
                 {
                     switch (dir)
@@ -68,7 +85,8 @@ namespace cg_lab3.Task2
                         case 1: { nextPoint = new Point(startPoint.X + 1, startPoint.Y - 1); break; }//вправо вверх
                         default: { nextPoint = new Point(startPoint.X + 1, startPoint.Y); break; }//вверх
                     }
-                    if (imageBitmap.GetPixel(nextPoint.X, nextPoint.Y) == baseColor)
+                    if (nextPoint.X >= 0 && nextPoint.X < imageBitmap.Width && nextPoint.Y >= 0 && nextPoint.Y < imageBitmap.Height && imageBitmap.GetPixel(nextPoint.X, nextPoint.Y) != baseColor)
+
                     {
                         startPoint = nextPoint;
                         break;
@@ -109,7 +127,7 @@ namespace cg_lab3.Task2
                     {
                         var pixel = imageBitmap.GetPixel(j, first.Y);
                         nextPixel = imageBitmap.GetPixel(j + 1, first.Y);
-                        if (pixel != baseColor && nextPixel == baseColor || pixel == baseColor && nextPixel != baseColor)
+                        if (pixel != baseColor && nextPixel != baseColor || pixel == baseColor && nextPixel != baseColor)
                             points.Add(new Point(j, first.Y));
                         if (pixel == baseColor)
                             continue;
